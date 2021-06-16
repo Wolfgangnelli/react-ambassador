@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Header = () => {
+const Header = (props: {title: string}) => {
     return (
         <header className="text-4xl text-center py-4">
-            <h1>Products page</h1>
+            <h1>{props.title}</h1>
         </header>
     )
 }

@@ -1,10 +1,11 @@
 import React from 'react';
-import Routes from '../routes/routes';
 
 
-const Main = () => {
+const Main = (props: any) => {
     return (       
-        <Routes />
+        <main className="container mx-auto h-full min-h-screen">
+            {props.children}
+        </main>
     )
 }
 
