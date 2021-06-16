@@ -11,7 +11,7 @@ import {Redirect} from 'react-router-dom';
 
 
 const Layout = (props: any) => {
-  const [redirect, setRedirect] = useState(false);
+/*   const [redirect, setRedirect] = useState(false); */
 
   useEffect(() => {
    (
@@ -21,15 +21,15 @@ const Layout = (props: any) => {
   
          props.setUser(data);
        } catch (error) {
-         setRedirect(true);
+        /*  setRedirect(true); */
        }
      }
    )()
   }, []);
 
-  if(redirect) {
+ /*  if(redirect) {
     return <Redirect to="/login" />
-  }
+  } */
 
     return (
         <div>
