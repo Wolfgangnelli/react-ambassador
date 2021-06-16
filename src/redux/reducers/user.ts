@@ -1,7 +1,9 @@
 import { User } from '../../models/user';
 import {SET_USER} from '../actions/actionTypes';
 
-const initialState = {}
+const initialState = {
+    user: new User()
+}
 
 const userReducer = (state = initialState, params: { type: string, user: User}) => {
     switch (params.type) {
