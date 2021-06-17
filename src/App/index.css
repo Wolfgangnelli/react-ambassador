@@ -29791,6 +29791,16 @@ video {
   --tw-backdrop-sepia: sepia(100%);
 }
 
+:root {
+  --bg-link-selected: #3770ed;
+  --cl-white: white;
+}
+
+.selected {
+  color: var(--bg-link-selected);
+  font-weight: bold;
+}
+
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;

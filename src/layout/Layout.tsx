@@ -27,7 +27,7 @@ const Layout = (props: any) => {
   }, []);
 
 let header;
-if(location.pathname === "/" || location.pathname === "/backend") {
+if(location.pathname === "/" || location.pathname === "/backend" || location.pathname === "/frontend") {
   header =  <Header />;
 }
 
