@@ -33,7 +33,7 @@ if(location.pathname === "/" || location.pathname === "/backend" || location.pat
 
 
     return (
-        <div>
+        <div className="bg-gray-50">
           <Nav />
          {header}
           <Main>
