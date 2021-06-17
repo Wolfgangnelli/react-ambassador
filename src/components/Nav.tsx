@@ -18,7 +18,7 @@ const Nav = (props: {user: User, setUser: any}) => {
 
     return (
         <nav className="w-full decoration-clone bg-gradient-to-b from-green-500 to-blue-600 h-14 flex justify-around items-center">
-            <span className="text-white font-semibold uppercase">Ambassador</span>
+            <Link to="/" className="text-white font-semibold uppercase">Ambassador</Link>
             <div className="flex items-center">
             <div className="relative inline-block px-2 py-1">
                 <Button setIsActive={setIsActive} isActive={isActive} />
@@ -33,7 +33,7 @@ const Nav = (props: {user: User, setUser: any}) => {
                 ) : (
                     <div className="rounded-t-[10px] md:rounded-lg flex items-stretch justify-end px-2 py-1 md:m-1">
                         <button onClick={loguot} className="bg-black bg-opacity-20 hover:bg-opacity-30 flex mr-1 px-3 py-2 text-xs font-medium text-white rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-50">Logout</button>
-                        <Link to="/profile" className="bg-black bg-opacity-20 hover:bg-opacity-30 flex mr-1 px-3 py-2 text-xs font-medium text-white rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-50 uppercase">{props.user.first_name}</Link>
+                        <Link to="/profile" title="profile" className="bg-black bg-opacity-20 hover:bg-opacity-30 flex mr-1 px-3 py-2 text-xs font-medium text-white rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-50 uppercase">{props.user.first_name}</Link>
                    </div>
                 )}
             </div>
