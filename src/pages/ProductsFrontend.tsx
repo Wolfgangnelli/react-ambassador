@@ -1,24 +1,26 @@
-import React from 'react';
+import axios from 'axios';
+import React, {useState, useEffect} from 'react';
+import Products from '../components/Products';
 import Layout from '../layout/Layout';
+import { Product } from '../models/product';
+
 
 
 const ProductsFrontend = () => {
+    const [products, setProducts] = useState<Product[]>([]);
+
+    useEffect(() => {
+        (
+            async () => {
+                const {data} = await axios.get("/products/frontend");
+                setProducts(data);
+            }
+        )();
+    }, []);
+    
     return (
         <Layout>
-        <div className="grid grid-cols-3 xl:grid-cols-4 py-8 gap-x-8 gap-y-6">
-            <h3 className="col-span-3 xl:col-span-1 text-gray-900 font-semibold">Products</h3>
-            <div className="col-span-3 grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-y-8 lg:gap-x-8">
-                <div className="bg-white rounded-lg shadow-sm overflow-hidden ring-1 ring-black ring-opacity-5">
-                    OOOOK card 1!
-                </div>
-                <div className="bg-white rounded-lg shadow-sm overflow-hidden ring-1 ring-black ring-opacity-5">
-                    OOOOK card 1!
-                </div>
-                <div className="bg-white rounded-lg shadow-sm overflow-hidden ring-1 ring-black ring-opacity-5">
-                    OOOOK card 1!
-                </div>
-            </div>
-        </div>
+            <Products page={"frontend"} products={products} /> 
         </Layout>
     )
 }

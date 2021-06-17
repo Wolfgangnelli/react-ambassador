@@ -3,7 +3,7 @@ import DropdownMenu from '../components/DropdownMenu';
 import {connect} from 'react-redux';
 import { User } from '../models/user';
 import { setUser } from '../redux/actions/user';
-import {Link} from 'react-router-dom';
+import {Link, NavLink} from 'react-router-dom';
 import Button from './Button';
 import axios from 'axios';
 import AuthButton from './AuthBotton';
@@ -18,7 +18,7 @@ const Nav = (props: {user: User, setUser: any}) => {
 
     return (
         <nav className="w-full decoration-clone bg-gradient-to-b from-green-500 to-blue-600 h-14 flex justify-around items-center">
-            <Link to="/" className="text-white font-semibold uppercase">Ambassador</Link>
+            <NavLink to="/" className="text-white font-semibold uppercase">Ambassador</NavLink>
             <div className="flex items-center">
             <div className="relative inline-block px-2 py-1">
                 <Button setIsActive={setIsActive} isActive={isActive} />

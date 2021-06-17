@@ -3,3 +3,13 @@
 @import "tailwindcss/components";
 
 @import "tailwindcss/utilities";
+
+:root {
+  --bg-link-selected: #3770ed;
+  --cl-white: white;
+}
+
+.selected {
+  color: var(--bg-link-selected);
+  font-weight: bold;
+}
