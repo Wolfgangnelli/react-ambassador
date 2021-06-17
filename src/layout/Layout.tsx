@@ -7,11 +7,11 @@ import axios from 'axios';
 import {connect} from 'react-redux';
 import { User } from '../models/user';
 import { setUser } from '../redux/actions/user';
-import {Redirect} from 'react-router-dom';
+import {useLocation} from 'react-router-dom';
 
 
 const Layout = (props: any) => {
-/*   const [redirect, setRedirect] = useState(false); */
+  let location = useLocation();
 
   useEffect(() => {
    (
@@ -21,20 +21,21 @@ const Layout = (props: any) => {
   
          props.setUser(data);
        } catch (error) {
-        /*  setRedirect(true); */
        }
      }
    )()
   }, []);
 
- /*  if(redirect) {
-    return <Redirect to="/login" />
-  } */
+let header;
+if(location.pathname === "/" || location.pathname === "/backend") {
+  header =  <Header />;
+}
+
 
     return (
         <div>
           <Nav />
-          <Header title={props.title} />
+         {header}
           <Main>
             {props.children}
           </Main>
