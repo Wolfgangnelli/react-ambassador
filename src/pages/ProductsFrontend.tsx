@@ -19,9 +19,9 @@ const ProductsFrontend = () => {
         (
             async () => {
                 const {data} = await axios.get("/products/frontend");
-                setAllProducts(data);
-                setFilteredProducts(data);
                 setLastPage(Math.ceil(data.length/perPage));
+                setAllProducts(data);
+                setFilteredProducts(data.slice(0, filters.page*perPage));
             }
         )();
     }, []);

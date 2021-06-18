@@ -32,6 +32,7 @@ const Products = (props: {page: string, products: Product[], filters: Filters, s
         })
     }
 
+
     return (
         <>
         <InputSearch search={search}>
@@ -47,7 +48,7 @@ const Products = (props: {page: string, products: Product[], filters: Filters, s
                     })}
             </div>
         </div>
-        {props.lastPage > props.filters.page &&
+        {props.filters.page !== props.lastPage &&
         <div className="my-4 text-center">
         <StdButton testo="Load More" load={load} />
         </div>
