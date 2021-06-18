@@ -11,11 +11,12 @@ const ProductsBackend = () => {
     const [filters, setFilters] = useState<Filters>({
         s: "",
         sort: "",
+        page: 1,
     });
+    const [lastPage, setLastPage] = useState(0);
 
 
 useEffect(() => {
-    console.log(filters);
     (
         async () => {
             const arr = [];
@@ -25,15 +26,19 @@ useEffect(() => {
             if(filters.sort) {
                 arr.push(`sort=${filters.sort}`)
             }
+            if(filters.page) {
+                arr.push(`page=${filters.page}`)
+            }
             const {data} = await axios.get(`/products/backend?${arr.join("&")}`);
-            setProducts(data.data);
+            setProducts(filters.page === 1 ? data.data : [...products, ...data.data]);
+            setLastPage(data.meta.last_page);
         }
     )();
 }, [filters])
 
     return (
         <Layout>
-            <Products page="backend" products={products} filters={filters} setFilters={setFilters} />
+            <Products page="backend" products={products} filters={filters} setFilters={setFilters} lastPage={lastPage} />
         </Layout>
     )
 }
