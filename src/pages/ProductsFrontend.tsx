@@ -9,8 +9,10 @@ import { Product } from '../models/product';
 const ProductsFrontend = () => {
     const [AllProducts, setAllProducts] = useState<Product[]>([]);
     const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
-    const [filters, setFilters] = useState<Filters>({s: "", sort: ""});
-
+    const [filters, setFilters] = useState<Filters>({s: "", sort: "", page: 1});
+    const [lastPage, setLastPage] = useState(0);
+    const perPage = 9;
+    
 
 
     useEffect(() => {
@@ -19,14 +21,14 @@ const ProductsFrontend = () => {
                 const {data} = await axios.get("/products/frontend");
                 setAllProducts(data);
                 setFilteredProducts(data);
+                setLastPage(Math.ceil(data.length/perPage));
             }
         )();
     }, []);
 
     useEffect(() => {
         let filtered = AllProducts.filter(product => product.title.toLowerCase().indexOf(filters.s.toLowerCase()) >= 0 || product.description.toLowerCase().indexOf(filters.s.toLowerCase()) >= 0);
-        setFilteredProducts(filtered);
-
+        
         if(filters.sort === "asc") {
             filtered.sort((a: Product, b: Product) => {
                 if(a.price > b.price) {
@@ -48,11 +50,13 @@ const ProductsFrontend = () => {
                 return 0;
             })
         }
+        setLastPage(Math.ceil(filtered.length/perPage));
+        setFilteredProducts(filtered.slice(0, filters.page*perPage));
     }, [filters])
 
     return (
         <Layout>
-            <Products page={"frontend"} products={filteredProducts} filters={filters} setFilters={setFilters} /> 
+            <Products page={"frontend"} products={filteredProducts} filters={filters} setFilters={setFilters} lastPage={lastPage} /> 
         </Layout>
     )
 }

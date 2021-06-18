@@ -4,13 +4,15 @@ import { Product } from '../models/product';
 import InputSearch from './InputSearch';
 import ProductCard from './ProductCard';
 import SelectMenu from './SelectMenu';
+import StdButton from './StdButton';
 
 
-const Products = (props: {page: string, products: Product[], filters: Filters, setFilters: (filters: Filters) => void}) => {
+const Products = (props: {page: string, products: Product[], filters: Filters, setFilters: (filters: Filters) => void, lastPage: number}) => {
 
     const search = (s: string) => {
         props.setFilters({
             ...props.filters,
+            page: 1,
             s
         });
     }
@@ -18,7 +20,15 @@ const Products = (props: {page: string, products: Product[], filters: Filters, s
     const sort = (sort: string) => {
         props.setFilters({
             ...props.filters,
+            page: 1,
             sort
+        })
+    }
+
+    const load = () => {
+        props.setFilters({
+            ...props.filters,
+            page: props.filters.page + 1
         })
     }
 
@@ -33,10 +43,15 @@ const Products = (props: {page: string, products: Product[], filters: Filters, s
                 {props.products.map(product => {
                     return (
                         <ProductCard key={product.id} product={product} />
-                    )
-                })}
+                        )
+                    })}
             </div>
         </div>
+        {props.lastPage > props.filters.page &&
+        <div className="my-4 text-center">
+        <StdButton testo="Load More" load={load} />
+        </div>
+        }
         </>
     )
 }
