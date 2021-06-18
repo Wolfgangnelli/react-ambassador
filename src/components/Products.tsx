@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Filters } from '../models/filters';
 import { Product } from '../models/product';
 import InputSearch from './InputSearch';
@@ -7,7 +7,13 @@ import SelectMenu from './SelectMenu';
 import StdButton from './StdButton';
 
 
-const Products = (props: {page: string, products: Product[], filters: Filters, setFilters: (filters: Filters) => void, lastPage: number}) => {
+const Products = (props: {
+    page: string, 
+    products: Product[], 
+    filters: Filters, 
+    setFilters: (filters: Filters) => void, 
+    lastPage: number}) => {
+        const [selected, setSelected] = useState<number[]>([]);
 
     const search = (s: string) => {
         props.setFilters({
@@ -32,6 +38,14 @@ const Products = (props: {page: string, products: Product[], filters: Filters, s
         })
     }
 
+    const select = (id: number) => {
+        if(selected.some(s => s === id)) {
+            setSelected(selected.filter(el => el !== id));
+            return;
+        } 
+        setSelected([...selected, id]);
+    }
+
 
     return (
         <>
@@ -43,7 +57,7 @@ const Products = (props: {page: string, products: Product[], filters: Filters, s
             <div className="col-span-3 grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-y-8 lg:gap-x-8">
                 {props.products.map(product => {
                     return (
-                        <ProductCard key={product.id} product={product} />
+                        <ProductCard key={product.id} product={product} select={select} selected={selected} />
                         )
                     })}
             </div>

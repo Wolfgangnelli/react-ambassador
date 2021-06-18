@@ -3,9 +3,14 @@ import { Product } from '../models/product';
 import { formatCurrency } from '../helpers';
 
 
-const ProductCard = (props: {product: Product}) => {
+const ProductCard = (props: {product: Product, select: any, selected: number[]}) => {
+
+
     return (
-        <div className="bg-whit group relative rounded-lg shadow-sm overflow-hidden ring-1 ring-black ring-opacity-5">
+        <div 
+        className={`bg-whit group relative rounded-lg shadow-sm overflow-hidden ring-1 ring-black ring-opacity-5 cursor-pointer ${props.selected.some(s => s === props.product.id) && "border-2 border-red-500"}`}
+        onClick={() => props.select(props.product.id)}
+        >
         <figure className="flex flex-col">                                
              <img src={props.product.image} alt={props.product.title} /> 
             <figcaption className="py-3 px-4">
